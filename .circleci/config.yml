@@ -53,7 +53,7 @@ workflows:
       - test-frontend:
           requires:
             - build-frontend
-      - intgration-tests:
+      - integration-tests:
           requires:
             - build-backend
             - build-frontend
