@@ -74,4 +74,8 @@ workflows:
             - test-backend
             - test-frontend
             - integration-tests
-## build triger
+          filters:
+            branches:
+              only:
+                - master
+# build triger
