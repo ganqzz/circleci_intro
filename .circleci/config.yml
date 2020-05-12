@@ -7,7 +7,7 @@ jobs:
     steps:
       - run: echo build-backend step
       - run: mkdir build_output
-      - run: echo $(date) " : Compiled" > build_output/compiled_output.txt
+      - run: 'echo $(date) ": Compiled" > build_output/compiled_output.txt'
       - persist_to_workspace:
           root: build_output
           paths:
