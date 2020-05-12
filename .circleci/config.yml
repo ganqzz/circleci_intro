@@ -62,6 +62,13 @@ jobs:
           at: ~/repo/workspace
       - run: cat ~/repo/workspace/compiled_output.txt
 
+  publish-package:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - run: echo publish-package step
+
 workflows:
   build-and-test:
     jobs:
@@ -88,9 +95,22 @@ workflows:
                 - master
       - test-environment:
           requires:
+            - test-backend
             - test-frontend
+            - integration-tests
           filters:
             branches:
               ignore:
                 - master
+
+  publish:
+    jobs:
+      - publish-package:
+          filters:
+            tags:
+              only:
+                - /v.*/
+            branches:
+              ignore:
+                - /.*/
 # triger
