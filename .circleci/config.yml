@@ -58,7 +58,7 @@ workflows:
             - build-backend
             - build-frontend
       - deploy:
-          requries:
+          requires:
             - test-backend
             - test-frontend
             - integration-tests
