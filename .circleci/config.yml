@@ -6,6 +6,12 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo build-backend step
+      - run: mkdir build_output
+      - run: echo "Compiled" > build_output/compiled_output.txt
+      - persist_to_workspace:
+          root: build_output
+          paths:
+            - '*'
 
   build-frontend:
     docker:
@@ -20,6 +26,9 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo test-backend step
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run: cat ~/repo/workspace/compiled_output.txt
 
   test-frontend:
     docker:
@@ -41,6 +50,9 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo deploy step
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run: cat ~/repo/workspace/compiled_output.txt
 
 workflows:
   build-and-test:
