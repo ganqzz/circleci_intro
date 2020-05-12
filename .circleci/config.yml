@@ -7,7 +7,7 @@ jobs:
     steps:
       - run: echo build-backend step
       - run: mkdir build_output
-      - run: echo "Compiled" > build_output/compiled_output.txt
+      - run: echo $(date) " : Compiled" > build_output/compiled_output.txt
       - persist_to_workspace:
           root: build_output
           paths:
@@ -61,6 +61,7 @@ jobs:
       - attach_workspace:
           at: ~/repo/workspace
       - run: cat ~/repo/workspace/compiled_output.txt
+      - run: echo $MY_SECRET
 
   publish-package:
     docker:
