@@ -90,7 +90,7 @@ workflows:
           requires:
             - test-frontend
           filters:
-            branch:
+            branches:
               ignore:
                 - master
 # triger
